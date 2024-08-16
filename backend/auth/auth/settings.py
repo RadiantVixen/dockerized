@@ -25,6 +25,7 @@ SECRET_KEY = '%1hl^rjd=bh!5gxi7my54h^lk7(dk-*y8%4qzgnihf-b+y#u0i'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = [‘*’]
 
 # Application definition
 
@@ -75,12 +76,13 @@ WSGI_APPLICATION = 'auth.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "mydatabase",
-        "USER": "myuser",
-        "PASSWORD": "mypassword",
-        "HOST": "localhost",
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'mypassword',
+        'HOST': 'my-postgres',
+        'PORT': '5432',
     }
 }
 

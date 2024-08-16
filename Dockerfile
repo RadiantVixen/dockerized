@@ -1,29 +1,17 @@
-# Use the official Python image from the Docker Hub
+# Use the official Python image from the DockerHub
 FROM python:3.10-slim
 
-# Set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+# Set the working directory in docker
+WORKDIR /app
 
+# Copy the dependencies file to the working directory
+COPY requirements.txt .
 
-# Set work directory
-WORKDIR /usr/src/app
+# Install any dependencies
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Install dependencies
-COPY requirements.txt /usr/src/app/
-# RUN pip install --no-cache-dir -r requirements.txt
+# Copy the content of the local src directory to the working directory
+COPY ./backend/auth .
 
-
-# RUN source myenv/bdjangorestframeworkin/activate
-# RUN pip install --upgrade pip
-# RUN pip install django
-
-
-# Copy project files
-COPY . /usr/src/app/
-
-# Expose the port the app runs on
-EXPOSE 8000
-
-# Command to run on container start
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "myproject.wsgi:application"]
+# Specify the command to run on container start
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
