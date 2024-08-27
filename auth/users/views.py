@@ -44,9 +44,13 @@ class LoginView(APIView):
         }
         return response
 
+class UserListView(APIView):
+    def get(self, request):
+        users = User.objects.all()
+        serializer = UserSerializer(users, many=True)
+        return Response(serializer.data)
 
 class UserView(APIView):
-
     def get(self, request):
         token = request.COOKIES.get('jwt')
 
