@@ -1,6 +1,5 @@
 from rest_framework import serializers
-from .models import User
-
+from .models import User, Profile, Friend, GameHistory
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -17,3 +16,18 @@ class UserSerializer(serializers.ModelSerializer):
             instance.set_password(password)
         instance.save()
         return instance
+
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ['first_name', 'last_name', 'display_name', 'avatar', 'language']
+
+class FriendSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Friend
+        fields = ['user', 'friend']
+
+class GameHistorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GameHistory
+        fields = ['user', 'date_played', 'opponent', 'score']
